@@ -3,6 +3,7 @@ import { useState } from "react";
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [availability, setAvailability] = useState(false);
+  const [year, setYear] = useState(1);
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
@@ -11,54 +12,55 @@ const SignUp = () => {
     }
   };
 
-  console.log(availability);
-  
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
       <div className="card w-full max-w-3xl bg-base-100 shadow-xl">
         <div className="card-body">
-          <form className="space-y-4">
-            {/* User Info Section */}
+          <form className="space-y-6">
             <div className="divider text-lg font-semibold">Create Profile</div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" placeholder="Full Name" className="input input-bordered w-full" required />
-              <input type="email" placeholder="Email (for verification)" className="input input-bordered w-full" required />
-              <input type="password" placeholder="Password" className="input input-bordered w-full md:col-span-1" required />
-
-                 {/* Profile Picture Upload */}
-            <div className="form-control w-full">
-              <label className="label cursor-pointer">
-                <input type="file" className="file-input file-input-bordered w-full" onChange={handleProfilePicChange} />
-              </label>
-              {profilePic && <img src={profilePic} alt="Preview" className="mt-2 w-20 h-20 rounded-full shadow-lg" />}
-            </div>
-
-              
-              <div className="w-full flex gap-x-4 items-center px-2">
-              <span className="label-text">Available</span>
-         <div className="flex items-center gap-x-2">
-         <span>NO</span>
-              <input
-                type="checkbox"
-                className="toggle toggle-neutral"
-                checked={availability}
-                onChange={() => setAvailability(!availability)}
-              />
-              
-              <span>YES</span>
-         </div>
-            </div>
-            </div>
-
-            
-            {/* Gender Selection */}
+            {/* Row 1: Name & Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="form-control">
-                <label className="label cursor-pointer">
-                  <span className="label-text">Gender</span>
-                </label>
+                <input type="text" placeholder="Full Name" className="input input-bordered w-full" required />
+              </div>
+              <div className="form-control">
+                <input type="email" placeholder="Email (for verification)" className="input input-bordered w-full" required />
+              </div>
+            </div>
+
+            {/* Row 2: Year & Department */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+              <div className="form-control">
+                <label className="label"><span className="label-text">Year</span></label>
+                <div className="flex items-center gap-4">
+                  <input
+                    type="range"
+                    min="1"
+                    max="4"
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                    className="range"
+                  />
+                  <span className="badge badge-primary text-lg">{year}</span>
+                </div>
+              </div>
+              <div className="form-control">
+                <select className="select select-bordered w-full">
+                  <option disabled selected>Select Department</option>
+                  <option>Computer Science</option>
+                  <option>Information Technology</option>
+                  <option>Electronics</option>
+                  <option>Mechanical</option>
+                  <option>Civil</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Row 3: Gender & Availability */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+              <div className="form-control">
+                <label className="label"><span className="label-text">Gender</span></label>
                 <div className="flex gap-4">
                   {["Male", "Female", "Other"].map((gender) => (
                     <label key={gender} className="flex items-center gap-2 cursor-pointer">
@@ -68,61 +70,40 @@ const SignUp = () => {
                   ))}
                 </div>
               </div>
+
+              <div className="form-control flex flex-col items-center">
+                <label className="label"><span className="label-text">Availability</span></label>
+                <div className="flex items-center gap-x-4">
+                  <span>NO</span>
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-primary"
+                    checked={availability}
+                    onChange={() => setAvailability(!availability)}
+                  />
+                  <span>YES</span>
+                </div>
+              </div>
             </div>
 
-         
-
-            {/* Additional Details */}
-            <div className="divider text-lg font-semibold">Additional Details</div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Year Selection - Slider */}
+            {/* Row 4: Profile Picture & Password */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
               <div className="form-control">
-                <label className="label cursor-pointer">
-                  <span className="label-text">Year</span>
+                <label className="btn btn-outline btn-primary w-full cursor-pointer">
+                  Upload Picture
+                  <input type="file" className="hidden" onChange={handleProfilePicChange} />
                 </label>
-                <input type="range" min="1" max="4" className="range" />
+                {profilePic && <img src={profilePic} alt="Preview" className="mt-2 w-20 h-20 rounded-full shadow-lg" />}
               </div>
-
-              {/* Department Selection */}
-              <select className="select select-bordered w-full">
-                <option disabled selected>Select Department</option>
-                <option>Computer Science</option>
-                <option>Information Technology</option>
-                <option>Electronics</option>
-                <option>Mechanical</option>
-                <option>Civil</option>
-              </select>
-            </div>
-
-            {/* Skills Selection - Checkboxes */}
-            <div className="form-control">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {["React", "Next.js", "Node.js", "Python", "ML", "AI", "Blockchain"].map((skill) => (
-                  <label key={skill} className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="checkbox" />
-                    {skill}
-                  </label>
-                ))}
-              </div>
-            </div>
-            {/* Availability - Toggle */}
-           
-
-            {/* Roles Selection - Checkboxes */}
-            <div className="form-control">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {["Frontend", "Backend", "Full Stack", "AI/ML", "Blockchain", "App Developer"].map((role) => (
-                  <label key={role} className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="checkbox" />
-                    {role}
-                  </label>
-                ))}
+              <div className="form-control">
+                <input type="password" placeholder="Password" className="input input-bordered w-full" required />
               </div>
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="btn btn-primary w-full mt-4">Sign Up</button>
+            <div className="flex justify-center">
+              <button type="submit" className="btn btn-primary w-full md:w-1/2 mt-4">Sign Up</button>
+            </div>
           </form>
         </div>
       </div>
