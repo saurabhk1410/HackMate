@@ -1,42 +1,43 @@
+import { FiEdit, FiMail, FiUsers, FiLogOut } from "react-icons/fi";
 
-import { FiEdit, FiMail, FiUsers } from "react-icons/fi"; // Import Edit Icon
 const DrawerSideBar = () => {
   return (
-
     <div className="drawer-side">
       <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-    
-      <div className="menu bg-base-100 text-base-content min-h-full w-80 p-0 flex flex-col">
+
+      <div className="menu bg-base-100 text-base-content min-h-full w-80 flex flex-col shadow-lg p-0">
         
-        {/* User Profile Button (Opens Edit Profile) */}
-        <button className="btn btn-neutral rounded-none w-full flex justify-between items-center">
-          <span className="font-bold">Saurabhkumar!</span>
-          <div className="flex items-center gap-2">
-            <FiEdit size={18} /> {/* Edit Icon */}
-            <span>Edit</span>
-          </div>
-        </button>
-    
-        {/* Navigation Options - Full Height Buttons */}
-        <div className="flex flex-col flex-grow mt-4 gap-2 p-4">
-        <button className="btn w-full h-40 bg-green-600 text-white hover:bg-green-700 text-lg font-semibold flex items-center justify-center gap-3 rounded-lg">
-            <FiUsers size={24} />
-            Create New Team
+        {/* User Profile Section - Full Width */}
+        <div className="w-full px-5 py-4 bg-neutral text-white flex items-center justify-between">
+          <span className="text-lg font-semibold tracking-wide">Saurabhkumar!</span>
+          <button className="flex items-center gap-2 text-white hover:text-gray-300 transition-all">
+            <FiEdit size={18} />
+            <span className="text-sm">Edit</span>
           </button>
-          <button className="btn w-full h-40 bg-blue-600 text-white hover:bg-blue-700 text-lg font-semibold flex items-center justify-center gap-3 rounded-lg">
-            <FiMail size={24} />
+        </div>
+
+        {/* Navigation Options */}
+        <div className="flex flex-col flex-grow p-5 gap-4">
+          <button className="btn w-full h-32 bg-amber-500 hover:bg-amber-600 text-white text-lg font-medium flex items-center justify-center gap-3 rounded-xl shadow-md transition-all">
+            <FiUsers size={26} />
+            Create Team
+          </button>
+          <button className="btn w-full h-32 bg-sky-500 hover:bg-sky-600 text-white text-lg font-medium flex items-center justify-center gap-3 rounded-xl shadow-md transition-all">
+            <FiMail size={26} />
             Requests
           </button>
         </div>
-    
-        {/* Logout Button - Stays at Bottom */}
-        <div className="mt-auto">
-          <button className="btn btn-error w-full rounded-none">Logout</button>
+
+        {/* Logout Button (Sticky at Bottom) */}
+        <div className="p-5 mt-auto">
+          <button className="btn w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2 text-lg font-semibold rounded-xl shadow-md transition-all">
+            <FiLogOut size={22} />
+            Logout
+          </button>
         </div>
       </div>
     </div>
-    
-  )
-}
+  );
+};
 
-export default DrawerSideBar
+export default DrawerSideBar;
