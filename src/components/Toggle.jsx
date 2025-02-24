@@ -9,7 +9,7 @@ const Toggle = () => {
   }, [theme]);
 
   return (
-    <label className="grid cursor-pointer place-items-center absolute top-6 right-4">
+    <label className="fixed top-6 right-4 cursor-pointer grid place-items-center z-50">
       <input
         type="checkbox"
         checked={theme === "dark"}
@@ -20,8 +20,8 @@ const Toggle = () => {
       <svg
         className="stroke-base-100 fill-base-100 col-start-1 row-start-1"
         xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
+        width="18"
+        height="18"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -36,8 +36,8 @@ const Toggle = () => {
       <svg
         className="stroke-base-100 fill-base-100 col-start-2 row-start-1"
         xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
+        width="18"
+        height="18"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
